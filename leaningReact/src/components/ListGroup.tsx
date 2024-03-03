@@ -1,0 +1,20 @@
+function ListGroup() {
+    const cities = [
+        'New York',
+        'San Francisco',
+        'Tokyo',
+        'London',
+        'Paris'
+    ];
+    const citiesDOM = cities.map((city,index) => <li key={index} className="list-group-item">{city}</li>)
+  return (
+    <>
+      <h1>List</h1>
+      <ul className="list-group">
+        {citiesDOM}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
