@@ -1,22 +1,27 @@
+// {list: [], heading: 'string'}
 import { useState } from "react";
 
-function ListGroup() {
-    const cities = [
-        'New York',
-        'San Francisco',
-        'Tokyo',
-        'London',
-        'Paris'
-    ];
+interface ListGroupProps {
+  list: string[] | number[];
+  heading: string;
+  onSelectedItem: (item: string | number)=>void;
+}
+function ListGroup(props: ListGroupProps) {
+
+    const valueSelected = (index: number,item:string | number)=> {
+      setSelectedItem(index);
+      props.onSelectedItem(item)
+    };
+    
     const [selectedItem, setSelectedItem] = useState(-1)
-    const citiesDOM = cities.map((city, index) => 
-    <li key={index} onClick={()=> setSelectedItem(index)} className={selectedItem === index? "list-group-item active":"list-group-item"}
-    >{city}</li>)
+    const listElements = props.list.map((element, index) => 
+    <li key={index} onClick={()=> valueSelected(index, element)} className={selectedItem === index? "list-group-item active":"list-group-item"}
+    >{element}</li>)
   return (
     <>
-      <h1>List</h1>
+      <h1>{props.heading}</h1>
       <ul className="list-group">
-        {citiesDOM}
+        {listElements}
       </ul>
     </>
   );
